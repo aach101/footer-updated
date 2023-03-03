@@ -17,11 +17,11 @@ function addDataToTable(data) {
     for (let i = 0; i < data.length; i++) {
         let dataSourceOfInfo = data[i].sourceOfInfo ||"";
         let key=Object.keys(data[i].links);
-        let link=Object.links(data[i].links);
+        let value=Object.values(data[i].links);
         tableBodyDom.innerHTML += `<tr>
         <td>${data[i]._id}</td>
         <td>${key }</td>
-        <td>${link}</td>
+        <td>${value}</td>
         
 
         <td>${new Date(data[i].createdAt).toDateString()}</td>
@@ -55,7 +55,7 @@ addFormDom.addEventListener("submit", (e) => {
    
 
     const name = document.getElementById("addlinkname").value;
-    const link = document.getElementById("addlink").value;
+    const value = document.getElementById("addlink").value;
 
     if (name == "") {
         alert("Please enter name");
@@ -74,7 +74,7 @@ addFormDom.addEventListener("submit", (e) => {
         
         .post("https://wdmc.onrender.com/footer/", {
             links:{
-                name: link,
+                name: value,
             }
             ,
             sourceOfInfo: sourceOfInfo,
@@ -96,7 +96,7 @@ editFormDom.addEventListener("submit", (e) => {
     e.preventDefault();
     const id = document.getElementById("editid").value;
     const name = document.getElementById("editlinkname").value;
-    const link = document.getElementById("editlink").value;
+    const value = document.getElementById("editlink").value;
 
     if (name == "") {
         alert("Please enter name");
@@ -113,7 +113,7 @@ editFormDom.addEventListener("submit", (e) => {
     axios
         .patch(`https://wdmc.onrender.com/footer/${id}`, {
             links:{
-                name: link,
+                name: value,
             },
             sourceOfInfo: sourceOfInfo,
         })
